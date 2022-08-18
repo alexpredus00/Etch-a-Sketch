@@ -1,0 +1,27 @@
+.header {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 150px;
+    font-family: "Lucida Handwriting", monospace;
+}
+
+
+#square{
+    height: 20px;
+    width: 20px;
+    background-color: #555;
+    margin: 2px;
+  }
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
