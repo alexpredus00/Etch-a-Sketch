@@ -7,17 +7,29 @@
     <link rel="stylesheet" href="style.css">
     <title>Etch-a-Sketch</title>
 </head>
-<body>
+<body style="background-color: #243447 ;">
     <div class="header">
-        <h1>Etch-a-Sketch</h1>
+        <div class="title">
+            <h1>Etch-a-Sketch</h1>
+        </div>
+        <div class="grid-container" id="container">
+        </div>
+        <div class="buttons">
+            <div class="black">
+                <button onclick=colorBlack() type="button" class="button"">Black</button> 
+            </div>
+            <div class="paintbrush">
+                <button onclick=colorPaintbrush() type="button" class="button">Paintbrush</button> 
+            </div>
+            <div class="rainbow" >
+                <button onclick=colorRainbow() type="button" class="button">Rainbow</button> 
+            </div>
+            <div class="clean">
+                <button onclick=colorErase() type="button" class="button">Clean</button> 
+            </div>
+        </div>
     </div>
-
-
-
-    <div class="container" id="container">
-    </div>
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="script.js"></script> 
 </body>
 </html>
