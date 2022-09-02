@@ -1,11 +1,12 @@
 
 let size_copy;
 const child_array = [0];
+var body = $('body');
 
 function createGrid(size){
 
-    size_copy = size;                              // 
-    for(let i = 0; i < size * size; i++){          // storing information for other functions
+    size_copy = size;                              
+    for(let i = 0; i < size * size; i++){          
         child_array[i] = 0;
     }
 
@@ -21,15 +22,17 @@ function createGrid(size){
     for(i = 0; i < size * size; i++){
         let pixel = document.createElement('div');
         pixel.id = "pixel" + i;
+        pixel.setAttribute('draggable', false);
         pixel.addEventListener("mouseover", (event) => {  
             pixel.style.backgroundColor = "black"; });
         grid.insertAdjacentElement("beforeend", pixel);
     }
 
 }
-console.log(child_array);
-createGrid(16);
 
+
+
+createGrid(16);
 
 
 
@@ -43,7 +46,6 @@ function colorBlack(){
 
 
 function colorErase(){
-    rainbowBackground(false);
     for(let i = 0; i < size_copy * size_copy; i++){         
         child_array[i] = 0;
     }
@@ -56,8 +58,8 @@ function colorErase(){
 
 
 
-function colorPaintbrush(){
-
+function colorPaintbrush(){  
+    rainbowBackground(false);
     for(let i = 0; i < size_copy * size_copy; i++){
         let pixel = document.getElementById("pixel" + i);
         let currentColor = pixel.style.backgroundColor;
@@ -95,66 +97,47 @@ function colorPaintbrush(){
 
 
 function colorRainbow(){
+    rainbowBackground(true);
     for(let i = 0; i < size_copy * size_copy; i++){
         let pixel = document.getElementById("pixel" + i);
         pixel.addEventListener("mouseenter", (event) => { 
             var randomColor = Math.floor(Math.random()*16777215).toString(16);
             pixel.style.backgroundColor = "#" + randomColor;
-            rainbowBackground(true);
         });
     }
 }
 
-
-function rainbowBackground(run){
-    var body = $('body');
+let refreshIntervalId = 0;
+let running = 0;
+function rainbowBackground(value){
     var colors = ['red', 'green', 'blue', 'yellow', 'pink', 'purple'];
     var currentIndex = 0;
-    setInterval(function () {
-
-        body.css({
-        backgroundColor: colors[currentIndex]
-        });
-        if (!colors[currentIndex]) {
-                currentIndex = 0;
-        } else {
-            currentIndex++;
-        }
-        if(run == false){
-            body.css({
-                backgroundColor: "purple"
+    if(running != value || running == 0){
+        if(value == true){
+                 refreshIntervalId = setInterval(function () {
+                running = value;
+                body.css({
+                backgroundColor: colors[currentIndex]
                 });
-               colors[0] = 'purple';
-               colors[1] = 'purple';
-               colors[2] = 'purple';
-               colors[3] = 'purple';
-               colors[4] = 'purple';
-               colors[5] = 'purple';
+                if (!colors[currentIndex]) {
+                        currentIndex = 0;
+                } else {
+                  currentIndex++;
+                }
+            }, 1000);
+        } else {
+            clearInterval(refreshIntervalId);
+                running = value;
+                body.css({
+                backgroundColor: "#243447"
+                });
         }
-    }, 1000);
-    
-    
+    }
 }
 
-
-
-
-
-
-
-
-
-
-/*
-
-
-
-*/
-
-
-
-
-
-
-
-
+let textSize = document.getElementById('textSize');
+function setSize(value){
+    rainbowBackground(false);
+    createGrid(value);
+    textSize.innerHTML = value + "x" + value;
+}

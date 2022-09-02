@@ -12,7 +12,7 @@
         <div class="title">
             <h1>Etch-a-Sketch</h1>
         </div>
-        <div class="grid-container" id="container">
+        <div class="grid-container" draggable="false" id="container">
         </div>
         <div class="buttons">
             <div class="black">
@@ -27,6 +27,12 @@
             <div class="clean">
                 <button onclick=colorErase() type="button" class="button">Clean</button> 
             </div>
+        </div>
+        <div class="size">
+            <input type="range" id="sizeSlider" name="sizeSlider" class="slider" min="4" max="64" value = "16" onclick="setSize(value)">
+        </div>
+        <div class="textSize">
+            <p id="textSize">16x16</p>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
